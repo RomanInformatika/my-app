@@ -34,7 +34,7 @@ export const Event = ({ item, navigation }) => {
 
         , [])
 
-    return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#8397fb' } : { ...styles.box }}>
+    return (<View style={!item.item.Visibility.includes('Учащиеся') ? { ...styles.box, backgroundColor: '#91d1fd' } : { ...styles.box }}>
         <View style={styles.data1}><Text style={styles.data}> {item.item.Time} {Period(item.item.DateStart, item.item.DateEnd)}</Text></View>
         <View style={styles.where1}><Text style={styles.where}>{item.item.Address}</Text></View>
         <TouchableOpacity onPress={() => navigation.navigate('Details', item.item.Description2)}>

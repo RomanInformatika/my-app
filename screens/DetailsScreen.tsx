@@ -28,18 +28,19 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 20,
-    backgroundColor: '#a1c4d6'
+    backgroundColor: '#205671'
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#ffffff'
   },
   link: {
     marginTop: 15,
     paddingVertical: 15,
   },
   linkText: {
-    fontSize: 14,
-    color: '#0a4563',
+    fontSize: 16,
+    color: '#bee8ff',
   },
 });

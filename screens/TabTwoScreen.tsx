@@ -33,7 +33,6 @@ export default function TabTwoScreen() {
         <View style={{ flexDirection: 'row', marginTop: 10, marginRight: 25, marginLeft: 25 }}>
           <ParallelSwitch label='7' />
           <ParallelSwitch label='6' />
-          <ParallelSwitch label='7' />
           <ParallelSwitch label='5' />
         </View>
         <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10, marginRight: 25, marginLeft: 25 }}>
@@ -53,7 +52,6 @@ export default function TabTwoScreen() {
         {/* </View> */}
 
       </TouchableOpacity>
-
     </View >
   );
 }
