@@ -4,23 +4,29 @@ import { useEffect, useState } from 'react';
 
 // import { Text,} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { ISOdateParse, filterAll, FormatParallel, FormatClass,DataClean } from '../utils'
 import { ClassSwitch } from '../components/classwitch'
 import { FilterBar } from '../components/filterBar'
 import { Event } from '../components/Event'
+import { setitems } from '../redux/userdataSlice';
 
-import Notification, { schedulePushNotification } from '../screens/notification'
+import Notification, { schedulePushNotification } from '../notification'
 
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function EventsScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const HiddenItems=useSelector(state=>state.userdata.hiddenItems)
+  // console.log(HiddenItems)
 
   let [isLoading, setIsLoading] = useState(true);
   let [error, setError] = useState();
-  let [result, setResult] = useState();
+  // let [result, setResult] = useState();
   let [response, setResponse] = useState();
   const selectFilter = useSelector((state) => state.filter)
+  const result = useSelector((state) => state.userdata.items)
+  const refreshItems = useSelector((state) => state.filter.refreshItems)
   const access = useSelector(state => state.userdata.person)
+  const setitemsD=useDispatch()
 
   useEffect(() => {
     fetch("https://school1298.ru/cl/teachers/calendar.json",
@@ -33,8 +39,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
       .then(res => res.json())
       .then(
         (result) => {
-          setResult(DataClean(result));
-          setResponse(filterAll(result, selectFilter, access));
+          // setResult(DataClean(result));
+          console.log('fetched')
+          setitemsD(setitems(DataClean(result)))
+          // setResponse(filterAll(result, selectFilter, access));
           setIsLoading(false);
         },
         (error) => {
@@ -47,10 +55,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 
   useEffect(() => {
 
-    setResponse(filterAll(result, selectFilter, access));
+    setResponse(filterAll(result, selectFilter, access,HiddenItems,false));
 
 
-  }, [selectFilter]);
+  }, [selectFilter,refreshItems]);
 
 
 

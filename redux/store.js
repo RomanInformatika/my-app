@@ -13,7 +13,8 @@ import { persistStore, persistReducer,FLUSH,
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['identityPassed'],
+  // serializableCheck: false
+  // blacklist: ['userdata'],
 }
 
 const rootReducer = combineReducers({userdata: userdataReducer, filter: filterReducer})
@@ -22,8 +23,14 @@ const rootReducer = combineReducers({userdata: userdataReducer, filter: filterRe
 const reducerP = persistReducer(persistConfig, rootReducer)
 
 const store =  configureStore({
+
   reducer:reducerP,
-  middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: { ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }),
+  middleware: getDefaultMiddleware => getDefaultMiddleware({ 
+    serializableCheck: { ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, 
+    immutableCheck: false,
+    serializableCheck: false,
+  
+  }),
 })
 
 
